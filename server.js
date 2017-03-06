@@ -8,10 +8,10 @@ var http = require("http"),
 port = process.argv[2] || 1337;
 
 http.createServer(function(request, response) {
-
+    request.url = '/src/client' + request.url;
     var uri = url.parse(request.url).pathname
         , filename = path.join(process.cwd(), uri);
-    console.log(request.url);
+    console.log(filename);
     fs.exists(filename, function(exists) {
         if(!exists) {
             response.writeHead(404, {"Content-Type": "text/plain"});
